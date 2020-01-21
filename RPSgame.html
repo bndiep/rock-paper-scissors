@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock, Paper, Scissors</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+            // function that gets a random integer (0 to 2)
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
+            }
+
+            // function that randomly returns 'rock', 'paper', or 'scissors'
+            function computerPlay() {
+                let computerAction = "";
+                const randomPlay = getRandomInt(3);
+
+                switch (randomPlay) {
+                    case 0 :
+                    computerAction = "rock";
+                    break;
+                    case 1 :
+                    computerAction = "paper";
+                    break;
+                    case 2 :
+                    computerAction = "scissors";
+                    break;
+                }
+                return computerAction;
+            }
+
+            // function that plays a single round of RPS
+            let currentScore = 0;
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection == computerSelection) {
+                    alert("You must be a mind reader.. We both chose " + playerSelection + " The result is a draw!\nSCORE: " + currentScore);
+                }else if (playerSelection == "rock" && computerSelection == "paper") {
+                    alert("Yikes. Paper covers rock, you LOSE.\nSCORE: " + currentScore);
+                }else if (playerSelection == "rock" && computerSelection == "scissors") {
+                    currentScore++;
+                    alert("Good job! Rock smashes scissors, you WIN!\nSCORE: " + currentScore);
+                }else if (playerSelection == "paper" && computerSelection == "rock") {
+                    currentScore++;
+                    alert("Awesome! Paper covers rock, you WIN!\nSCORE: " + currentScore);
+                }else if (playerSelection == "paper" && computerSelection == "scissors") {
+                    alert("Oh no. Scissors cut up your paper. You LOSE.\nSCORE: " + currentScore);
+                }else if (playerSelection == "scissors" && computerSelection == "paper") {
+                    currentScore++;
+                    alert("Woo hoo! Your scissors cut up my paper! You WIN!\nSCORE: " + currentScore);
+                }else if (playerSelection == "scissors" && computerSelection == "rock") {
+                    alert("Darn it. Rock smashes your scissors and you LOSE.\nSCORE: " + currentScore);
+                }else {
+                    alert("Invalid response. Please REFRESH your browser and input either rock, paper, or scissors.");
+                }
+                // just to check whether the score is being added properly
+                return currentScore;
+            }
+
+            // function to play a 5 round game that keeps score and reports winner or loser at end
+            function game() {
+                // may have to use a loop or just the playRound function 5 times in a row
+                // use console.log() to display the results of each round and winner at end
+                // use prompt() to get input from user
+                for (let i = 0; i < 5; i++) {
+                    // initial start of game
+                    let gameStart = prompt("Ready to play? Please select rock, paper, or scissors.");
+
+                    const playerSelection = gameStart.toLowerCase();
+                    const computerSelection = computerPlay();
+
+                    console.log(playRound(playerSelection, computerSelection));
+                }
+                // displays the overall score and whether the user is the winner or loser
+                if (currentScore <= 2) {
+                    alert("TOTAL SCORE: " + currentScore + ". YOU'RE THE LOSER.");
+                }else {
+                    alert("TOTAL SCORE: " + currentScore + ". YOU'RE THE WINNER!");
+                }
+            }
+   
+        console.log(game());
+
+        </script>
+    </body>
+</html>
